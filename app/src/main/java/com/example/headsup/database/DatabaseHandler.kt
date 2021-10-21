@@ -10,7 +10,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, "celebrities"
 
     override fun onCreate(db: SQLiteDatabase?) {
         if(db != null){
-            db.execSQL("create table celebrities (Name text, Taboo1 text, Taboo2 text, Taboo3 text)")
+            db.execSQL("create table celebrities (_id integer primary key autoincrement, Name text, Taboo1 text, Taboo2 text, Taboo3 text)")
         }
     }
 
