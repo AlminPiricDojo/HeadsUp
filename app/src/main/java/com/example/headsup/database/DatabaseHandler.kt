@@ -1,5 +1,6 @@
 package com.example.headsup.database
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -28,6 +29,7 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, "celebrities"
         return sqlDb.insert("celebrities", null, contentValues)
     }
 
+    @SuppressLint("Range")
     fun getCelebrities(): ArrayList<Celebrity>{
         val celebrities: ArrayList<Celebrity> = ArrayList()
         val tableName = "celebrities"
@@ -62,5 +64,27 @@ class DatabaseHandler(context: Context): SQLiteOpenHelper(context, "celebrities"
         }
 
         return celebrities
+    }
+
+    fun updateCelebrity(celebrity: Celebrity): Int {
+        val contentValues = ContentValues()
+        contentValues.put("Name", celebrity.name)
+        contentValues.put("Taboo1", celebrity.taboo1)
+        contentValues.put("Taboo2", celebrity.taboo2)
+        contentValues.put("Taboo3", celebrity.taboo3)
+
+        val success = sqlDb.update("celebrities", contentValues, "_id = ${celebrity.id}", null)
+
+        sqlDb.close()
+        return success
+    }
+
+    fun deleteCelebrity(celebrity: Celebrity): Int{
+        val contentValues = ContentValues()
+        contentValues.put("_id", celebrity.id)
+        val success = sqlDb.delete("celebrities", "_id = ${celebrity.id}", null)
+        sqlDb.close()
+        return success
+//        success > 0 means it worked
     }
 }

@@ -3,10 +3,11 @@ package com.example.headsup.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.headsup.Data
 import com.example.headsup.database.Celebrity
 import com.example.headsup.databinding.ItemRowBinding
 
-class RVAdapter(private var celebrities: ArrayList<Celebrity>): RecyclerView.Adapter<RVAdapter.ItemViewHolder>() {
+class RVAdapter(private val activity: Data, private var celebrities: ArrayList<Celebrity>): RecyclerView.Adapter<RVAdapter.ItemViewHolder>() {
     class ItemViewHolder(val binding: ItemRowBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -18,6 +19,8 @@ class RVAdapter(private var celebrities: ArrayList<Celebrity>): RecyclerView.Ada
 
         holder.binding.apply {
             tvCelebrity.text = "${celebrity.name} - ${celebrity.taboo1} - ${celebrity.taboo2} - ${celebrity.taboo3}"
+            tvCelebrity.setOnClickListener { activity.updateCelebrity(celebrity) }
+            btDeleteCelebrity.setOnClickListener { activity.deleteCelebrity(celebrity) }
         }
     }
 

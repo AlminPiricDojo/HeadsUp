@@ -52,6 +52,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add" />
+
+        <Button
+            android:id="@+id/btUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="Update" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
